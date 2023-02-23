@@ -1,12 +1,12 @@
 const express = require("express");
-const { addContactValidation, updateContactValidation } = require("../../middlewares/validationRequests");
+const { addContactValidation, updateContactValidation } = require("../../middlewares");
 const {
   getAllContact,
   getById,
   postContact,
   deleteContact,
   putContact
-} = require("../../controllers/contactController");
+} = require("../../controllers");
 const router = express.Router();
 
 router.get("/", getAllContact);
