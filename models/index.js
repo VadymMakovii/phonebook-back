@@ -1,15 +1,14 @@
 const {
-  getListContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
-} = require("./contacts");
+  Contact,
+  addContactValidation,
+  updateContactValidation,
+  updateFavoriteValidation
+} = require("./contact");
+
 
 module.exports = {
-  getListContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
+  Contact,
+  addContactValidation,
+  updateContactValidation,
+  updateFavoriteValidation
 };

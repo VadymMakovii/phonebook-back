@@ -1,9 +1,3 @@
-const {
-  addContactValidation,
-  updateContactValidation,
-} = require("./validationRequests");
+const isValidId = require('./isValidId');
 
-module.exports = {
-  addContactValidation,
-  updateContactValidation,
-};
+module.exports = { isValidId };

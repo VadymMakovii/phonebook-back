@@ -4,16 +4,18 @@ const {
   addContact,
   removeContact,
   updateContact,
-} = require("../../models");
-const asyncHandler = require('../helpers');
+  updateStatusContact 
+} = require("../services");
+
+const { asyncHandler } = require('../helpers');
 
 const getAllContact = async (__, res) => {
-  const contacts = await asyncHandler(getListContacts());
+  const contacts = await getListContacts();
   return res.status(200).json(contacts);
 };
 
 const getById = async (req, res) => {
-  const contact = await asyncHandler(getContactById(req.params.contactId));
+  const contact = await getContactById(req.params.contactId);
   if (contact) {
     return res.status(200).json(contact);
   } else {
@@ -22,12 +24,12 @@ const getById = async (req, res) => {
 };
 
 const postContact = async (req, res) => {
-  const newContact = await asyncHandler(addContact(req.body));
+  const newContact = await addContact(req.body);
   res.status(201).json(newContact);
 };
 
 const deleteContact = async (req, res) => {
-  const contact = await asyncHandler(removeContact(req.params.contactId));
+  const contact = await removeContact(req.params.contactId);
   if (contact) {
     res.status(200).json({ message: "contact deleted" });
   } else {
@@ -39,7 +41,7 @@ const putContact = async (req, res) => {
   if (Object.keys(req.body).length === 0) {
     return res.status(400).json({ message: "missing fields" });
   }
-  const newData = await asyncHandler(updateContact(req.params.contactId, req.body));
+  const newData = await updateContact(req.params.contactId, req.body);
   if (newData) {
     res.status(200).json(newData);
   } else {
@@ -47,10 +49,23 @@ const putContact = async (req, res) => {
   }
 };
 
+const patchContact = async (req, res) => {
+  if (Object.keys(req.body).length === 0) {
+    return res.status(400).json({ message: "missing field favorite" });
+  }
+  const newData = await updateStatusContact (req.params.contactId, req.body);
+  if (newData) {
+    res.status(200).json(newData);
+  } else {
+    res.status(404).json({ message: "Not found" });
+  }
+}
+
 module.exports = {
-  getAllContact,
-  getById,
-  postContact,
-  deleteContact,
-  putContact,
+  getAllContact: asyncHandler(getAllContact),
+  getById: asyncHandler(getById),
+  postContact: asyncHandler(postContact),
+  deleteContact: asyncHandler(deleteContact),
+  putContact: asyncHandler(putContact),
+  patchContact: asyncHandler(patchContact)
 };
