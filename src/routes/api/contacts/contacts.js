@@ -1,6 +1,6 @@
 const express = require("express");
-const { addContactValidation, updateContactValidation, updateFavoriteValidation } = require("../../../models");
-const { isValidId } = require('../../middlewares');
+const { addContactValidation, updateContactValidation, updateFavoriteValidation } = require("../../../../models");
+const { isValidId } = require('../../../middlewares');
 const {
   getAllContact,
   getById,
@@ -8,7 +8,7 @@ const {
   deleteContact,
   putContact,
   patchContact
-} = require("../../controllers");
+} = require("../../../controllers");
 
 const router = express.Router();
 

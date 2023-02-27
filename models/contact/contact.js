@@ -6,7 +6,7 @@ const {
   phoneValidationPattern,
   nameValidationPattern,
   phoneValidationMessage,
-} = require("../src/helpers");
+} = require("../../src/helpers");
 
 const contactSchema = new Schema(
   {
