@@ -4,7 +4,8 @@ const {
   postContact,
   deleteContact,
   putContact,
-} = require("./contactController");
+  patchContact,
+} = require("./contacts");
 
 module.exports = {
   getAllContact,
@@ -12,4 +13,5 @@ module.exports = {
   postContact,
   deleteContact,
   putContact,
+  patchContact,
 };
