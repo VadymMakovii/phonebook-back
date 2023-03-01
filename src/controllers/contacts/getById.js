@@ -2,14 +2,14 @@ const {
   getContactById,
 } = require("../../services");
 
-const { asyncHandler } = require('../../helpers');
+const { asyncHandler, HttpError } = require('../../helpers');
 
 const getById = async (req, res) => {
   const contact = await getContactById(req.params.contactId);
   if (contact) {
     return res.status(200).json(contact);
   } else {
-    return res.status(404).json({ message: "Not found" });
+    throw HttpError(404, "Not found");
   }
 };
 

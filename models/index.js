@@ -5,10 +5,19 @@ const {
   updateFavoriteValidation
 } = require("./contact");
 
+const {
+  User,
+  registerValidationSchema,
+  loginValidationSchema,
+} = require("./user");
+
 
 module.exports = {
   Contact,
+  User,
   addContactValidation,
   updateContactValidation,
-  updateFavoriteValidation
+  updateFavoriteValidation,
+  registerValidationSchema,
+  loginValidationSchema,
 };
