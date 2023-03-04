@@ -8,6 +8,8 @@ const {
   emailValidationMessage,
 } = require("../../src/helpers");
 
+const subscriptionType = ["starter", "pro", "business"];
+
 const userSchema = new Schema(
   {
     password: {
@@ -23,10 +25,13 @@ const userSchema = new Schema(
     },
     subscription: {
       type: String,
-      enum: ["starter", "pro", "business"],
+      enum: subscriptionType,
       default: "starter",
     },
-    token: String,
+    token: {
+      type: String,
+      default: null,
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -49,7 +54,9 @@ const registerValidationSchema = (req, res, next) => {
       .pattern(emailValidationPattern)
       .message(emailValidationMessage)
       .required(),
-    subscription: Joi.string().optional(),
+    subscription: Joi.string()
+      .valid(...subscriptionType)
+      .optional(),
   });
   validationResult(req, res, next, schema);
 };
@@ -60,7 +67,16 @@ const loginValidationSchema = (req, res, next) => {
     email: Joi.string()
       .pattern(emailValidationPattern)
       .message(emailValidationMessage)
-      .optional(),
+      .required(),
+  });
+  validationResult(req, res, next, schema);
+};
+
+const updateSubscriptionValidation = (req, res, next) => {
+  const schema = Joi.object({
+    subscription: Joi.string()
+      .valid(...subscriptionType)
+      .required(),
   });
   validationResult(req, res, next, schema);
 };
@@ -71,4 +87,5 @@ module.exports = {
   User,
   registerValidationSchema,
   loginValidationSchema,
+  updateSubscriptionValidation,
 };

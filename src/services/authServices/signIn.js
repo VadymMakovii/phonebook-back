@@ -5,13 +5,16 @@ const { HttpError } = require("../../helpers");
 
 const { SECRET_KEY } = process.env;
 
-const signIn = async (body) => {
-  const { email, password } = body;
+const signIn = async (req) => {
+  const { email, password } = req.body;
   const user = await User.findOne({ email });
+
   if (!user) {
-    throw HttpError(401, "Email or password invalid");
+    throw HttpError(401);
   }
+
   const passwordCompare = await bcrypt.compare(password, user.password);
+
   if (!passwordCompare) {
     throw HttpError(401, "Email or password invalid");
   }
@@ -20,9 +23,18 @@ const signIn = async (body) => {
     id: user._id,
   };
 
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "2d" });
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1d" });
 
-  return token;
+  const updatedUser = await User.findByIdAndUpdate(user._id, { token }).select(
+    "-_id email subscription"
+  );
+
+  const responseBody = {
+    token,
+    user: updatedUser,
+  };
+
+  return responseBody;
 };
 
 module.exports = {

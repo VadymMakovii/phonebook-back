@@ -9,6 +9,7 @@ const {
   User,
   registerValidationSchema,
   loginValidationSchema,
+  updateSubscriptionValidation
 } = require("./user");
 
 
@@ -20,4 +21,5 @@ module.exports = {
   updateFavoriteValidation,
   registerValidationSchema,
   loginValidationSchema,
+  updateSubscriptionValidation
 };

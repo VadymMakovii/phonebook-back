@@ -7,7 +7,13 @@ const {
   patchContact,
 } = require("./contacts");
 
-const { registerUser, loginUser} = require("./auth");
+const {
+  registerUser,
+  loginUser,
+  currentUser,
+  logoutUser,
+  patchUser,
+} = require("./auth");
 
 module.exports = {
   getAllContact,
@@ -17,5 +23,8 @@ module.exports = {
   putContact,
   patchContact,
   registerUser,
-  loginUser
+  loginUser,
+  currentUser,
+  logoutUser,
+  patchUser,
 };
