@@ -1,11 +1,14 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
+const {HttpError} = require('../../src/helpers');
 
 const {
   mongooseErrorHandler,
   phoneValidationPattern,
   nameValidationPattern,
   phoneValidationMessage,
+  emailValidationPattern,
+  emailValidationMessage,
 } = require("../../src/helpers");
 
 const contactSchema = new Schema(
@@ -26,6 +29,11 @@ const contactSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -34,8 +42,9 @@ contactSchema.post("save", mongooseErrorHandler);
 
 const validationResult = (req, res, next, schema) => {
   const result = schema.validate(req.body);
+  const errorMessage  = result.error?.details[0]?.message;
   if (result.error) {
-    return res.status(400).json(result.error.details);
+    throw HttpError(400, errorMessage);
   }
   next();
 };
@@ -44,7 +53,8 @@ const addContactValidation = (req, res, next) => {
   const schema = Joi.object({
     name: Joi.string().pattern(nameValidationPattern).min(2).max(30).required(),
     email: Joi.string()
-      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+      .pattern(emailValidationPattern)
+      .message(emailValidationMessage)
       .required(),
     phone: Joi.string()
       .min(10)
@@ -61,7 +71,8 @@ const updateContactValidation = (req, res, next) => {
   const schema = Joi.object({
     name: Joi.string().pattern(nameValidationPattern).min(2).max(30).optional(),
     email: Joi.string()
-      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+      .pattern(emailValidationPattern)
+      .message(emailValidationMessage)
       .optional(),
     phone: Joi.string()
       .min(10)

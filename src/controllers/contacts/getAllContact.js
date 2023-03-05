@@ -2,8 +2,8 @@ const { getListContacts } = require("../../services");
 
 const { asyncHandler } = require("../../helpers");
 
-const getAllContact = async (__, res) => {
-  const contacts = await getListContacts();
+const getAllContact = async (req, res) => {
+  const contacts = await getListContacts(req);
   return res.status(200).json(contacts);
 };
 

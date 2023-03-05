@@ -1,11 +1,4 @@
 const {
-  Contact,
-  addContactValidation,
-  updateContactValidation,
-  updateFavoriteValidation
-} = require("./contact");
-
-const {
   User,
   registerValidationSchema,
   loginValidationSchema,
@@ -14,11 +7,7 @@ const {
 
 
 module.exports = {
-  Contact,
   User,
-  addContactValidation,
-  updateContactValidation,
-  updateFavoriteValidation,
   registerValidationSchema,
   loginValidationSchema,
   updateSubscriptionValidation

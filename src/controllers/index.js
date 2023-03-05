@@ -7,6 +7,14 @@ const {
   patchContact,
 } = require("./contacts");
 
+const {
+  registerUser,
+  loginUser,
+  currentUser,
+  logoutUser,
+  patchUser,
+} = require("./auth");
+
 module.exports = {
   getAllContact,
   getById,
@@ -14,4 +22,9 @@ module.exports = {
   deleteContact,
   putContact,
   patchContact,
+  registerUser,
+  loginUser,
+  currentUser,
+  logoutUser,
+  patchUser,
 };
