@@ -8,7 +8,11 @@ const putContact = async (req, res) => {
   }
   const newData = await updateContact(req.params.contactId, req.body);
   if (newData) {
-    res.status(200).json(newData);
+    res.status(200).json({
+      status: "success",
+      code: 200,
+      data: newData,
+    });
   } else {
     throw HttpError(404, "Not found");
   }

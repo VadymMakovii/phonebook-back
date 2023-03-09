@@ -4,7 +4,11 @@ const { asyncHandler } = require("../../helpers");
 
 const getAllContact = async (req, res) => {
   const contacts = await getListContacts(req);
-  return res.status(200).json(contacts);
+  return res.status(200).json({
+    status: "success",
+    code: 200,
+    data: contacts,
+  });
 };
 
 module.exports = {

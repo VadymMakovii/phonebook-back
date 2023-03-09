@@ -7,7 +7,9 @@ const {
   updateStatusContact,
 } = require("./contactsServices");
 
-const { addUser, signIn, updateSubscription } = require("./authServices");
+const { addUser, signIn } = require("./authServices");
+
+const { updateSubscription, overwriteAvatar } = require("./userServices");
 
 module.exports = {
   getListContacts,
@@ -19,4 +21,5 @@ module.exports = {
   addUser,
   signIn,
   updateSubscription,
+  overwriteAvatar,
 };
