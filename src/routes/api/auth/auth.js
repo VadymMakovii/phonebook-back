@@ -12,9 +12,10 @@ const {
   currentUser,
   logoutUser,
   patchUser,
+  updateAvatar,
 } = require("../../../controllers");
 
-const { authentication } = require("../../../middlewares");
+const { authentication, upload } = require("../../../middlewares");
 
 const router = express.Router();
 
@@ -27,5 +28,8 @@ router.get("/current", authentication, currentUser);
 router.post("/logout", authentication, logoutUser);
 
 router.patch("/", authentication, updateSubscriptionValidation, patchUser);
+
+router.patch("/avatars", authentication, upload.single("avatar"), updateAvatar);
+
 
 module.exports = router;

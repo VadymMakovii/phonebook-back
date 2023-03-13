@@ -16,3 +16,6 @@ mongoose
     console.log(err.messsage);
     process.exit(1);
   });
+
+
+module.exports = mongoose;
