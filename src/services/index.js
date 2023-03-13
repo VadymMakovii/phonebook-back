@@ -9,7 +9,12 @@ const {
 
 const { addUser, signIn } = require("./authServices");
 
-const { updateSubscription, overwriteAvatar } = require("./userServices");
+const {
+  updateSubscription,
+  overwriteAvatar,
+  verifyUserEmail,
+  resendEmail,
+} = require("./userServices");
 
 module.exports = {
   getListContacts,
@@ -22,4 +27,6 @@ module.exports = {
   signIn,
   updateSubscription,
   overwriteAvatar,
+  verifyUserEmail,
+  resendEmail,
 };

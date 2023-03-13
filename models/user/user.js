@@ -35,7 +35,15 @@ const userSchema = new Schema(
     avatarURL: {
       type: String,
       required: [true, "Avatar is required"],
-    }
+    },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, "Verify token is required"],
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -85,6 +93,16 @@ const updateSubscriptionValidation = (req, res, next) => {
   validationResult(req, res, next, schema);
 };
 
+const resendEmailValidation = (req, res, next) => {
+  const schema = Joi.object({
+    email: Joi.string().required().pattern(emailValidationPattern).messages({
+      "string.pattern.base": emailValidationMessage,
+      "any.required": "Missing required field email",
+    }),
+  });
+  validationResult(req, res, next, schema);
+};
+
 const User = model("user", userSchema);
 
 module.exports = {
@@ -92,4 +110,5 @@ module.exports = {
   registerValidationSchema,
   loginValidationSchema,
   updateSubscriptionValidation,
+  resendEmailValidation,
 };
