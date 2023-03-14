@@ -21,8 +21,7 @@ const addUser = async (body) => {
   const msg = {
   to: email,
   subject: 'Verification email',
-  text: 'Please follow the link to confirm your email address',
-  html: `<a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Confirm email</a>`,
+  html: `<p>Please follow the link to confirm your email address</p><a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Confirm email</a>`,
   }
   await sendEmail(msg);
 
