@@ -11,6 +11,8 @@ const { addUser, signIn } = require("./authServices");
 
 const { updateSubscription, overwriteAvatar } = require("./userServices");
 
+const { verifyUserEmail, resendEmail } = require("./emailServices");
+
 module.exports = {
   getListContacts,
   getContactById,
@@ -22,4 +24,6 @@ module.exports = {
   signIn,
   updateSubscription,
   overwriteAvatar,
+  verifyUserEmail,
+  resendEmail,
 };

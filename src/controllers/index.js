@@ -9,7 +9,13 @@ const {
 
 const { registerUser, loginUser, logoutUser } = require("./auth");
 
-const { currentUser, patchUser, updateAvatar } = require("./users");
+const {
+  currentUser,
+  patchUser,
+  updateAvatar,
+  verifyEmail,
+  resendVerificationEmail
+} = require("./users");
 
 module.exports = {
   getAllContact,
@@ -23,5 +29,7 @@ module.exports = {
   currentUser,
   logoutUser,
   patchUser,
-  updateAvatar
+  updateAvatar,
+  verifyEmail,
+  resendVerificationEmail
 };

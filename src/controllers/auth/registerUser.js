@@ -6,7 +6,7 @@ const registerUser = async (req, res) => {
   const newUser = await addUser(req.body);
   res.status(201).json({
     status: "success",
-    code: 200,
+    code: 201,
     data: {
       email: newUser.email,
       subscription: newUser.subscription,

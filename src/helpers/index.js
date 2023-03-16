@@ -10,11 +10,14 @@ const {
 
 const HttpError = require('./HttpError');
 
+const sendEmail = require('./sendEmail');
+
 
 module.exports = {
   asyncHandler,
   mongooseErrorHandler,
   HttpError,
+  sendEmail,
   phoneValidationPattern,
   nameValidationPattern,
   phoneValidationMessage,

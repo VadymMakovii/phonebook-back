@@ -4,6 +4,7 @@ const {
   registerValidationSchema,
   loginValidationSchema,
   updateSubscriptionValidation,
+  resendEmailValidation
 } = require("../../../../models");
 
 const {
@@ -13,6 +14,8 @@ const {
   logoutUser,
   patchUser,
   updateAvatar,
+  verifyEmail,
+  resendVerificationEmail
 } = require("../../../controllers");
 
 const { authentication, upload } = require("../../../middlewares");
@@ -22,6 +25,10 @@ const router = express.Router();
 router.post("/register", registerValidationSchema, registerUser);
 
 router.post("/login", loginValidationSchema, loginUser);
+
+router.post("/verify", resendEmailValidation, resendVerificationEmail);
+
+router.get("/verify/:verificationToken", verifyEmail);
 
 router.get("/current", authentication, currentUser);
 

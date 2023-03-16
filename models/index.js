@@ -2,16 +2,16 @@ const {
   Contact,
   addContactValidation,
   updateContactValidation,
-  updateFavoriteValidation
+  updateFavoriteValidation,
 } = require("./contact");
 
 const {
   User,
   registerValidationSchema,
   loginValidationSchema,
-  updateSubscriptionValidation
+  updateSubscriptionValidation,
+  resendEmailValidation,
 } = require("./user");
-
 
 module.exports = {
   Contact,
@@ -21,5 +21,6 @@ module.exports = {
   updateFavoriteValidation,
   registerValidationSchema,
   loginValidationSchema,
-  updateSubscriptionValidation
+  updateSubscriptionValidation,
+  resendEmailValidation,
 };
