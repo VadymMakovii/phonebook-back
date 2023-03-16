@@ -9,12 +9,9 @@ const {
 
 const { addUser, signIn } = require("./authServices");
 
-const {
-  updateSubscription,
-  overwriteAvatar,
-  verifyUserEmail,
-  resendEmail,
-} = require("./userServices");
+const { updateSubscription, overwriteAvatar } = require("./userServices");
+
+const { verifyUserEmail, resendEmail } = require("./emailServices");
 
 module.exports = {
   getListContacts,
