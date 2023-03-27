@@ -3,18 +3,14 @@ const {
   getById,
   postContact,
   deleteContact,
-  putContact,
-  patchContact,
+  putContact
 } = require("./contacts");
 
 const { registerUser, loginUser, logoutUser } = require("./auth");
 
 const {
   currentUser,
-  patchUser,
-  updateAvatar,
-  verifyEmail,
-  resendVerificationEmail
+  updateAvatar
 } = require("./users");
 
 module.exports = {
@@ -23,13 +19,9 @@ module.exports = {
   postContact,
   deleteContact,
   putContact,
-  patchContact,
   registerUser,
   loginUser,
   currentUser,
   logoutUser,
-  patchUser,
-  updateAvatar,
-  verifyEmail,
-  resendVerificationEmail
+  updateAvatar
 };

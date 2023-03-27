@@ -9,6 +9,9 @@ const deleteContact = async (req, res) => {
       status: "success",
       code: 200,
       message: "contact deleted",
+      data: {
+        id: contact._id
+      }
     });
   } else {
     throw HttpError(404, "Not found");

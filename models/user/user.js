@@ -8,10 +8,13 @@ const {
   emailValidationMessage,
 } = require("../../src/helpers");
 
-const subscriptionType = ["starter", "pro", "business"];
-
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      minlength: 2,
+      required: [true, "Set username"],
+    },
     password: {
       type: String,
       minlength: 6,
@@ -23,11 +26,6 @@ const userSchema = new Schema(
       unique: true,
       required: [true, "Email is required"],
     },
-    subscription: {
-      type: String,
-      enum: subscriptionType,
-      default: "starter",
-    },
     token: {
       type: String,
       default: null,
@@ -35,14 +33,6 @@ const userSchema = new Schema(
     avatarURL: {
       type: String,
       required: [true, "Avatar is required"],
-    },
-    verify: {
-      type: Boolean,
-      default: false,
-    },
-    verificationToken: {
-      type: String,
-      required: [true, "Verify token is required"],
     },
   },
   { versionKey: false, timestamps: true }
@@ -61,14 +51,12 @@ const validationResult = (req, res, next, schema) => {
 
 const registerValidationSchema = (req, res, next) => {
   const schema = Joi.object({
+    name: Joi.string().min(2).max(30).required(),
     password: Joi.string().min(6).required(),
     email: Joi.string()
       .pattern(emailValidationPattern)
       .message(emailValidationMessage)
       .required(),
-    subscription: Joi.string()
-      .valid(...subscriptionType)
-      .optional(),
   });
   validationResult(req, res, next, schema);
 };
@@ -84,31 +72,10 @@ const loginValidationSchema = (req, res, next) => {
   validationResult(req, res, next, schema);
 };
 
-const updateSubscriptionValidation = (req, res, next) => {
-  const schema = Joi.object({
-    subscription: Joi.string()
-      .valid(...subscriptionType)
-      .required(),
-  });
-  validationResult(req, res, next, schema);
-};
-
-const resendEmailValidation = (req, res, next) => {
-  const schema = Joi.object({
-    email: Joi.string().required().pattern(emailValidationPattern).messages({
-      "string.pattern.base": emailValidationMessage,
-      "any.required": "Missing required field email",
-    }),
-  });
-  validationResult(req, res, next, schema);
-};
-
 const User = model("user", userSchema);
 
 module.exports = {
   User,
   registerValidationSchema,
-  loginValidationSchema,
-  updateSubscriptionValidation,
-  resendEmailValidation,
+  loginValidationSchema
 };

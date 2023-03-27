@@ -9,14 +9,18 @@ const getListContacts = async (req) => {
 
   const contactsList = await Contact.find(
     { owner, ...rest },
-    "-createdAt -updatedAt",
+    "-createdAt -updatedAt -owner",
     {
       skip,
       limit,
     }
   ).populate("owner", "email");
 
-  return contactsList;
+  const data = contactsList.map(({ _id, name, phone }) => {
+    return { id: _id, name, phone };
+  });
+
+  return data;
 };
 
 module.exports = {

@@ -1,6 +1,6 @@
 const phoneValidationPattern =
   /^\+?[0-9]{0,3}?\s?\(?[0-9]{0,3}?\)?[0-9\s?\-?]*$/;
-const nameValidationPattern = /^[a-zA-Z]*\s?[a-zA-Z]*$/;
+const nameValidationPattern = /^([a-zA-Z-]\s?)*$/;
 const emailValidationPattern = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
 
 const emailValidationMessage =

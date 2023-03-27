@@ -1,16 +1,12 @@
 const {
   User,
   registerValidationSchema,
-  loginValidationSchema,
-  updateSubscriptionValidation,
-  resendEmailValidation
+  loginValidationSchema
 } = require("./user");
 
 
 module.exports = {
   User,
   registerValidationSchema,
-  loginValidationSchema,
-  updateSubscriptionValidation,
-  resendEmailValidation
+  loginValidationSchema
 };

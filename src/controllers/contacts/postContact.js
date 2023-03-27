@@ -7,7 +7,11 @@ const postContact = async (req, res) => {
   res.status(201).json({
     status: "success",
     code: 200,
-    data: newContact,
+    data: {
+      id: newContact._id,
+      name: newContact.name,
+      phone: newContact.phone
+    },
   });
 };
 module.exports = {

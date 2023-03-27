@@ -2,7 +2,6 @@ const express = require("express");
 const {
   addContactValidation,
   updateContactValidation,
-  updateFavoriteValidation,
 } = require("../../../../models");
 const { isValidId, authentication } = require("../../../middlewares");
 const {
@@ -10,8 +9,7 @@ const {
   getById,
   postContact,
   deleteContact,
-  putContact,
-  patchContact,
+  putContact
 } = require("../../../controllers");
 
 const router = express.Router();
@@ -32,12 +30,5 @@ router.put(
   putContact
 );
 
-router.patch(
-  "/:contactId/favorite",
-  authentication,
-  isValidId,
-  updateFavoriteValidation,
-  patchContact
-);
 
 module.exports = router;

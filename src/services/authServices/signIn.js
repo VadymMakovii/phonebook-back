@@ -15,18 +15,18 @@ const signIn = async (req) => {
 
   const passwordCompare = await bcrypt.compare(password, user.password);
 
-  if (!passwordCompare || !user.verify) {
-    throw HttpError(401, "Email is wrong or not verify, or password invalid");
+  if (!passwordCompare) {
+    throw HttpError(401, "Email is wrong or password is invalid");
   }
 
   const payload = {
-    id: user._id,
+    email
   };
 
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1d" });
 
   const updatedUser = await User.findByIdAndUpdate(user._id, { token }).select(
-    "-_id email subscription"
+    "-_id email name"
   );
 
   const responseBody = {

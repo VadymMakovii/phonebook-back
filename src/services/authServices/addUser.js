@@ -1,12 +1,14 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const gravatar = require("gravatar");
-const  {v4: uuidv4}  = require("uuid");
 const { User } = require("../../../models");
 const { HttpError } = require("../../helpers");
-const {sendEmail} = require('../../helpers');
+
+const { SECRET_KEY } = process.env;
 
 const addUser = async (body) => {
   const { email, password } = body;
+
   const user = await User.findOne({ email });
   if (user) {
     throw HttpError(409, "Email is already in use");
@@ -16,20 +18,17 @@ const addUser = async (body) => {
 
   const avatarURL = gravatar.url(email);
 
-  const verificationToken = uuidv4();
+  const payload = {
+    email
+  };
 
-  const msg = {
-  to: email,
-  subject: 'Verification email',
-  html: `<p>Please follow the link to confirm your email address</p><a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Confirm email</a>`,
-  }
-  await sendEmail(msg);
-
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1d" });
+  
   const newUser = await User.create({
     ...body,
     password: hashPassword,
     avatarURL,
-    verificationToken,
+    token,
   });
 
   return newUser;

@@ -6,8 +6,6 @@ const { addContact } = require("./addContact");
 
 const { updateContact } = require("./updateContact");
 
-const { updateStatusContact } = require("./updateStatusContact");
-
 const { removeContact } = require("./removeContact");
 
 module.exports = {
@@ -16,5 +14,4 @@ module.exports = {
   removeContact,
   addContact,
   updateContact,
-  updateStatusContact,
 };

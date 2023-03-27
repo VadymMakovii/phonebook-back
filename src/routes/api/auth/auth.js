@@ -2,9 +2,7 @@ const express = require("express");
 
 const {
   registerValidationSchema,
-  loginValidationSchema,
-  updateSubscriptionValidation,
-  resendEmailValidation
+  loginValidationSchema
 } = require("../../../../models");
 
 const {
@@ -12,10 +10,7 @@ const {
   loginUser,
   currentUser,
   logoutUser,
-  patchUser,
-  updateAvatar,
-  verifyEmail,
-  resendVerificationEmail
+  updateAvatar
 } = require("../../../controllers");
 
 const { authentication, upload } = require("../../../middlewares");
@@ -26,15 +21,9 @@ router.post("/register", registerValidationSchema, registerUser);
 
 router.post("/login", loginValidationSchema, loginUser);
 
-router.post("/verify", resendEmailValidation, resendVerificationEmail);
-
-router.get("/verify/:verificationToken", verifyEmail);
-
 router.get("/current", authentication, currentUser);
 
 router.post("/logout", authentication, logoutUser);
-
-router.patch("/", authentication, updateSubscriptionValidation, patchUser);
 
 router.patch("/avatars", authentication, upload.single("avatar"), updateAvatar);
 
